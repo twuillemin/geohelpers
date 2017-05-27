@@ -50,6 +50,13 @@
             <version>2.5.0</version>
         </dependency>
 
+        <!-- The parser for WKT files -->
+        <dependency>
+            <groupId>net.wuillemin</groupId>
+            <artifactId>wktgrammar</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>

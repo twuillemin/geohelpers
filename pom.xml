@@ -34,7 +34,17 @@
         <junit.version>4.12</junit.version>
         <kotlon.version>2.5.0</kotlon.version>
         <wktgrammar.version>0.2</wktgrammar.version>
+        <dokka.version>0.9.13</dokka.version>
     </properties>
+
+    <!-- Repository for Dokka -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jcenter</id>
+            <name>JCenter</name>
+            <url>https://jcenter.bintray.com/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
 
@@ -82,6 +92,7 @@
 
         <plugins>
 
+            <!-- Build with Kotlin -->
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -99,6 +110,20 @@
                         <phase>test-compile</phase>
                         <goals>
                             <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>dokka-maven-plugin</artifactId>
+                <version>${dokka.version}</version>
+                <executions>
+                    <execution>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>dokka</goal>
                         </goals>
                     </execution>
                 </executions>

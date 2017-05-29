@@ -5,17 +5,41 @@ import com.github.salomonbrys.kotson.jsonObject
 import com.google.gson.JsonElement
 
 /**
- * A Simple class representing a LineString. A LineString must be composed of at least two vertices
+ * A class representing a LineString. A LineString must be composed of at least two vertices
  */
 open class LineString : Curve {
 
+    /**
+     * The list of the vertices (points) in the collection
+     */
     val vertices: List<Point>
+
+    /**
+     * Get the number of coordinate dimensions of the object.
+     */
     override val coordinateDimension get() = vertices.first().coordinateDimension
+
+    /**
+     * Get the number of spatial dimensions of the object.
+     */
     override val spatialDimension get() = vertices.first().spatialDimension
 
+    /**
+     * Constructor. Checks if the LineString has at least two points and check that all given
+     * vertices have the same coordinateDimension and spatialDimension. In both case, an AssertionError is
+     * thrown.
+     *
+     * @param vertices the vertices (points) of the LineString
+     */
     constructor(vertices: List<Point>) : this(vertices, "LineString")
 
-    constructor(vertices: List<Point>, geometryType: String) : super(geometryType) {
+    /**
+     * Constructor to be used by sub classes that allows to define the geometryType
+     *
+     * @param vertices the vertices (points) of the LineString
+     * @param geometryType the name of the geometry type, for example "LinearRing"
+     */
+    protected constructor(vertices: List<Point>, geometryType: String) : super(geometryType) {
 
         // Check for at least two vertices
         if (vertices.size < 2) {

@@ -9,13 +9,17 @@ import com.google.gson.JsonElement
  */
 open class MultiPoint : GeometryCollection {
 
+    /**
+     * Get the dimension of the object. Will always return 0 for MultiPoint objects
+     */
     override val dimension get() = 0
-    override val coordinateDimension get() = -1
-    override val spatialDimension get() = -1
 
-    constructor(geometries: List<Point>) : this(geometries, "MultiPoint")
-
-    constructor(geometries: List<Point>, geometryType: String) : super(geometries, geometryType)
+    /**
+     * Constructor for MultiPoint objects
+     *
+     * @param geometries the list of Point to be referenced in the collection
+     */
+    constructor(geometries: List<Point>) : super(geometries, "MultiPoint")
 
     override fun generateAsGeoJsonObject(): JsonElement {
         return jsonObject(

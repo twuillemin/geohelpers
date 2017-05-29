@@ -9,13 +9,12 @@ import com.google.gson.JsonElement
  */
 open class MultiLineString : MultiCurve {
 
-    override val dimension get() = 1
-    override val coordinateDimension get() = -1
-    override val spatialDimension get() = -1
-
-    constructor(geometries: List<LineString>) : this(geometries, "MultiLineString")
-
-    constructor(geometries: List<LineString>, geometryType: String) : super(geometries, geometryType)
+    /**
+     * Constructor for MultiLineString objects
+     *
+     * @param geometries the list of LineString to be referenced in the collection
+     */
+    constructor(geometries: List<LineString>) : super(geometries, "MultiLineString")
 
     override fun generateAsGeoJsonObject(): JsonElement {
         return jsonObject(

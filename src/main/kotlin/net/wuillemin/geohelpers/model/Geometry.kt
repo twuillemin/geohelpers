@@ -12,7 +12,7 @@ abstract class Geometry(val geometryType: String) {
      * * 0: Point
      * * 1: Curve
      * * 2: Surface
-     * * -1: Collection
+     * * -1: Not applicable / Not known (ie Empty collection)
      */
     abstract val dimension: Int
 
@@ -22,7 +22,6 @@ abstract class Geometry(val geometryType: String) {
      * * 3: 2D + M or 2D + Z
      * * 4: Surface
      * * -1: Not applicable / Not known (ie Empty collection)
-     * </ul>
      */
     abstract val coordinateDimension: Int
 

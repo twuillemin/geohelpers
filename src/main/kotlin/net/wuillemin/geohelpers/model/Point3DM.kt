@@ -8,8 +8,14 @@ import com.google.gson.JsonElement
  */
 data class Point3DM(val x: Double, val y: Double, val z: Double, val m: Double) : Point() {
 
-    override val dimension get() = 0
+    /**
+     * For 3DM points, coordinateDimension is always 4 (X, Y, Z and M)
+     */
     override val coordinateDimension get() = 4
+
+    /**
+     * For 3DM points, coordinateDimension is always 4 (X, Y and Z)
+     */
     override val spatialDimension get() = 3
 
     override fun generateAsGeoJsonSubObject(): JsonElement = jsonArray(x, y, z, m)

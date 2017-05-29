@@ -5,5 +5,8 @@ package net.wuillemin.geohelpers.model
  */
 abstract class Surface(geometryType: String) : Geometry(geometryType) {
 
-    override val dimension get() = 2
+    /**
+     * For surfaces, dimension is always 2
+     */
+    final override val dimension get() = 2
 }

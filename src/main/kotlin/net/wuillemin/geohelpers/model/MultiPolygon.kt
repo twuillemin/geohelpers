@@ -9,13 +9,12 @@ import com.google.gson.JsonElement
  */
 open class MultiPolygon : MultiSurface {
 
-    override val dimension get() = 2
-    override val coordinateDimension get() = -1
-    override val spatialDimension get() = -1
-
-    constructor(geometries: List<Polygon>) : this(geometries, "MultiPolygon")
-
-    constructor(geometries: List<Polygon>, geometryType: String) : super(geometries, geometryType)
+    /**
+     * Constructor for MultiPolygon objects
+     *
+     * @param geometries the list of Polygon to be referenced in the collection
+     */
+    constructor(geometries: List<Polygon>) : super(geometries, "MultiPolygon")
 
     override fun generateAsGeoJsonObject(): JsonElement {
         return jsonObject(

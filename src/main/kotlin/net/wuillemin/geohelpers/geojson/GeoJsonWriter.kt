@@ -1,12 +1,6 @@
 package net.wuillemin.geohelpers.geojson
 
-import com.github.salomonbrys.kotson.jsonArray
-import com.github.salomonbrys.kotson.jsonObject
-import com.google.gson.JsonObject
-import net.wuillemin.geohelpers.model.LineString
-import net.wuillemin.geohelpers.model.Point
 import net.wuillemin.geohelpers.model.Geometry
-import net.wuillemin.geohelpers.model.Polygon
 
 /**
  * A Simple class for writing GeoJson Data. Supported data are: POINT, LINESTRING, POLYGON and MULTIPOINT

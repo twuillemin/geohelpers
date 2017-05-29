@@ -1,7 +1,8 @@
 package net.wuillemin.geohelpers.model
 
 /**
- * Abstract class for all Triangles
+ * Class for triangle polygons. All linear rings must have four vertices (points)
+ * In case they are not, an AssertionError is thrown
  */
 class Triangle(rings: List<LinearRing>) : Polygon(rings, "Triangle") {
 

@@ -8,7 +8,10 @@ import com.google.gson.JsonElement
  */
 abstract class Point : Geometry("Point") {
 
-    override val dimension get() = 0
+    /**
+     * For points, dimension is always 0
+     */
+    final override val dimension get() = 0
 
     override fun generateAsGeoJsonObject(): JsonElement {
         return jsonObject(

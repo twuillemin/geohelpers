@@ -5,5 +5,8 @@ package net.wuillemin.geohelpers.model
  */
 abstract class Curve(geometryType: String) : Geometry(geometryType) {
 
+    /**
+     * For curves, dimension is always 1
+     */
     override val dimension get() = 1
 }

@@ -1,11 +1,12 @@
 package net.wuillemin.geohelpers.wkt
 
-import net.wuillemin.geohelpers.common.LineString
-import net.wuillemin.geohelpers.common.MultiLineString
-import net.wuillemin.geohelpers.common.MultiPoint
-import net.wuillemin.geohelpers.common.MultiPolygon
-import net.wuillemin.geohelpers.common.Point
-import net.wuillemin.geohelpers.common.Polygon
+import net.wuillemin.geohelpers.model.LineString
+import net.wuillemin.geohelpers.model.LinearRing
+import net.wuillemin.geohelpers.model.MultiLineString
+import net.wuillemin.geohelpers.model.MultiPoint
+import net.wuillemin.geohelpers.model.MultiPolygon
+import net.wuillemin.geohelpers.model.Point2D
+import net.wuillemin.geohelpers.model.Polygon
 import org.junit.Test
 import java.io.File
 import kotlin.test.assertEquals
@@ -24,14 +25,7 @@ class WktReaderTest {
         val pointFile = File(javaClass.classLoader.getResource("wkt\\point.txt").toURI()).inputStream()
 
         val point = WktReader.readWKT(pointFile)
-
-        if (point is Point) {
-            assertEquals(30.0, point.x)
-            assertEquals(10.0, point.y)
-        }
-        else {
-            assertTrue(point is Point)
-        }
+        assertEquals(Point2D(30.0, 10.0), point)
     }
 
     @Test
@@ -43,13 +37,10 @@ class WktReaderTest {
         val line = WktReader.readWKT(lineStringFile)
 
         if (line is LineString) {
-            assertEquals(3, line.points.size)
-            assertEquals(30.0, line.points[0].x)
-            assertEquals(10.0, line.points[0].y)
-            assertEquals(10.0, line.points[1].x)
-            assertEquals(30.0, line.points[1].y)
-            assertEquals(40.0, line.points[2].x)
-            assertEquals(40.0, line.points[2].y)
+            assertEquals(3, line.vertices.size)
+            assertEquals(Point2D(30.0, 10.0), line.vertices[0])
+            assertEquals(Point2D(10.0, 30.0), line.vertices[1])
+            assertEquals(Point2D(40.0, 40.0), line.vertices[2])
         }
         else {
             assertTrue(line is LineString)
@@ -66,21 +57,16 @@ class WktReaderTest {
 
         if (polygon is Polygon) {
 
-            assertEquals(1, polygon.lines.size)
+            assertEquals(1, polygon.rings.size)
 
-            val line = polygon.lines[0]
-            if (line is LineString) {
-                assertEquals(5, line.points.size)
-                assertEquals(1.0, line.points[0].x)
-                assertEquals(1.0, line.points[0].y)
-                assertEquals(5.0, line.points[1].x)
-                assertEquals(1.0, line.points[1].y)
-                assertEquals(5.0, line.points[2].x)
-                assertEquals(5.0, line.points[2].y)
-                assertEquals(1.0, line.points[3].x)
-                assertEquals(5.0, line.points[3].y)
-                assertEquals(1.0, line.points[4].x)
-                assertEquals(1.0, line.points[4].y)
+            val line = polygon.rings[0]
+            if (line is LinearRing) {
+                assertEquals(5, line.vertices.size)
+                assertEquals(Point2D(1.0, 1.0), line.vertices[0])
+                assertEquals(Point2D(5.0, 1.0), line.vertices[1])
+                assertEquals(Point2D(5.0, 5.0), line.vertices[2])
+                assertEquals(Point2D(1.0, 5.0), line.vertices[3])
+                assertEquals(Point2D(1.0, 1.0), line.vertices[4])
             }
             else {
                 assertTrue(line is LineString)
@@ -100,16 +86,9 @@ class WktReaderTest {
         val multiPoint = WktReader.readWKT(multiPointFile)
 
         if (multiPoint is MultiPoint) {
-
-            assertEquals(2, multiPoint.points.size)
-
-            val point1 = multiPoint.points[0]
-            assertEquals(3.5, point1.x)
-            assertEquals(5.6, point1.y)
-
-            val point2 = multiPoint.points[1]
-            assertEquals(4.8, point2.x)
-            assertEquals(10.5, point2.y)
+            assertEquals(2, multiPoint.geometries.size)
+            assertEquals(Point2D(3.5, 5.6), multiPoint.geometries[0])
+            assertEquals(Point2D(4.8, 10.5), multiPoint.geometries[1])
         }
         else {
             assertTrue(multiPoint is MultiPoint)
@@ -126,25 +105,28 @@ class WktReaderTest {
 
         if (multiLineString is MultiLineString) {
 
-            assertEquals(2, multiLineString.lines.size)
+            assertEquals(2, multiLineString.geometries.size)
+            val line1 = multiLineString.geometries[0]
+            if (line1 is LineString) {
+                assertEquals(3, line1.vertices.size)
+                assertEquals(Point2D(3.0, 4.0), line1.vertices[0])
+                assertEquals(Point2D(10.0, 50.0), line1.vertices[1])
+                assertEquals(Point2D(20.0, 25.0), line1.vertices[2])
+            }
+            else {
+                assertTrue(line1 is LineString)
+            }
 
-            val line1 = multiLineString.lines[0]
-            assertEquals(3, line1.points.size)
-            assertEquals(3.0, line1.points[0].x)
-            assertEquals(4.0, line1.points[0].y)
-            assertEquals(10.0, line1.points[1].x)
-            assertEquals(50.0, line1.points[1].y)
-            assertEquals(20.0, line1.points[2].x)
-            assertEquals(25.0, line1.points[2].y)
-
-            val line2 = multiLineString.lines[1]
-            assertEquals(3, line2.points.size)
-            assertEquals(-5.0, line2.points[0].x)
-            assertEquals(-8.0, line2.points[0].y)
-            assertEquals(-10.0, line2.points[1].x)
-            assertEquals(-8.0, line2.points[1].y)
-            assertEquals(-15.0, line2.points[2].x)
-            assertEquals(-4.0, line2.points[2].y)
+            val line2 = multiLineString.geometries[1]
+            if (line2 is LineString) {
+                assertEquals(3, line2.vertices.size)
+                assertEquals(Point2D(-5.0, -8.0), line2.vertices[0])
+                assertEquals(Point2D(-10.0, -8.0), line2.vertices[1])
+                assertEquals(Point2D(-15.0, -4.0), line2.vertices[2])
+            }
+            else {
+                assertTrue(line2 is LineString)
+            }
         }
         else {
             assertTrue(multiLineString is MultiLineString)
@@ -161,53 +143,61 @@ class WktReaderTest {
 
         if (multipolygon is MultiPolygon) {
 
-            assertEquals(2, multipolygon.polygons.size)
+            assertEquals(2, multipolygon.geometries.size)
 
-            val polygon1 = multipolygon.polygons[0]
-            assertEquals(2, polygon1.lines.size)
+            val polygon1 = multipolygon.geometries[0]
+            if (polygon1 is Polygon) {
+                assertEquals(2, polygon1.rings.size)
 
-            val line1 = polygon1.lines[0]
-            assertEquals(5, line1.points.size)
-            assertEquals(1.0, line1.points[0].x)
-            assertEquals(1.0, line1.points[0].y)
-            assertEquals(5.0, line1.points[1].x)
-            assertEquals(1.0, line1.points[1].y)
-            assertEquals(5.0, line1.points[2].x)
-            assertEquals(5.0, line1.points[2].y)
-            assertEquals(1.0, line1.points[3].x)
-            assertEquals(5.0, line1.points[3].y)
-            assertEquals(1.0, line1.points[4].x)
-            assertEquals(1.0, line1.points[4].y)
+                val line1 = polygon1.rings[0]
+                if (line1 is LinearRing) {
+                    assertEquals(5, line1.vertices.size)
+                    assertEquals(Point2D(1.0, 1.0), line1.vertices[0])
+                    assertEquals(Point2D(5.0, 1.0), line1.vertices[1])
+                    assertEquals(Point2D(5.0, 5.0), line1.vertices[2])
+                    assertEquals(Point2D(1.0, 5.0), line1.vertices[3])
+                    assertEquals(Point2D(1.0, 1.0), line1.vertices[4])
+                }
+                else {
+                    assertTrue(line1 is LinearRing)
+                }
 
-            val line2 = polygon1.lines[1]
-            assertEquals(5, line2.points.size)
-            assertEquals(2.0, line2.points[0].x)
-            assertEquals(2.0, line2.points[0].y)
-            assertEquals(2.0, line2.points[1].x)
-            assertEquals(3.0, line2.points[1].y)
-            assertEquals(3.0, line2.points[2].x)
-            assertEquals(3.0, line2.points[2].y)
-            assertEquals(3.0, line2.points[3].x)
-            assertEquals(2.0, line2.points[3].y)
-            assertEquals(2.0, line2.points[4].x)
-            assertEquals(2.0, line2.points[4].y)
+                val line2 = polygon1.rings[1]
+                if (line2 is LinearRing) {
+                    assertEquals(5, line2.vertices.size)
+                    assertEquals(Point2D(2.0, 2.0), line2.vertices[0])
+                    assertEquals(Point2D(2.0, 3.0), line2.vertices[1])
+                    assertEquals(Point2D(3.0, 3.0), line2.vertices[2])
+                    assertEquals(Point2D(3.0, 2.0), line2.vertices[3])
+                    assertEquals(Point2D(2.0, 2.0), line2.vertices[4])
+                }
+                else {
+                    assertTrue(line2 is LinearRing)
+                }
+            }
+            else {
+                assertTrue(polygon1 is Polygon)
+            }
 
-            val polygon2 = multipolygon.polygons[1]
-            assertEquals(1, polygon2.lines.size)
+            val polygon2 = multipolygon.geometries[1]
+            if (polygon2 is Polygon) {
+                assertEquals(1, polygon2.rings.size)
 
-            val line3 = polygon2.lines[0]
-            assertEquals(4, line3.points.size)
-            assertEquals(6.0, line3.points[0].x)
-            assertEquals(3.0, line3.points[0].y)
-            assertEquals(9.0, line3.points[1].x)
-            assertEquals(2.0, line3.points[1].y)
-            assertEquals(9.0, line3.points[2].x)
-            assertEquals(4.0, line3.points[2].y)
-            assertEquals(6.0, line3.points[3].x)
-            assertEquals(3.0, line3.points[3].y)
-        }
-        else {
-            assertTrue(multipolygon is MultiPolygon)
+                val line3 = polygon2.rings[0]
+                if (line3 is LinearRing) {
+                    assertEquals(4, line3.vertices.size)
+                    assertEquals(Point2D(6.0, 3.0), line3.vertices[0])
+                    assertEquals(Point2D(9.0, 2.0), line3.vertices[1])
+                    assertEquals(Point2D(9.0, 4.0), line3.vertices[2])
+                    assertEquals(Point2D(6.0, 3.0), line3.vertices[3])
+                }
+                else {
+                    assertTrue(line3 is LinearRing)
+                }
+            }
+            else {
+                assertTrue(polygon1 is Polygon)
+            }
         }
     }
 }

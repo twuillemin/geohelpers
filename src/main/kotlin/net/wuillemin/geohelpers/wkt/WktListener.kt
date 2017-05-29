@@ -1,12 +1,13 @@
 package net.wuillemin.geohelpers.wkt
 
-import net.wuillemin.geohelpers.common.LineString
-import net.wuillemin.geohelpers.common.MultiLineString
-import net.wuillemin.geohelpers.common.MultiPoint
-import net.wuillemin.geohelpers.common.MultiPolygon
-import net.wuillemin.geohelpers.common.Point
-import net.wuillemin.geohelpers.common.Polygon
-import net.wuillemin.geohelpers.common.Shape
+import net.wuillemin.geohelpers.model.Geometry
+import net.wuillemin.geohelpers.model.LineString
+import net.wuillemin.geohelpers.model.LinearRing
+import net.wuillemin.geohelpers.model.MultiLineString
+import net.wuillemin.geohelpers.model.MultiPoint
+import net.wuillemin.geohelpers.model.MultiPolygon
+import net.wuillemin.geohelpers.model.Point2D
+import net.wuillemin.geohelpers.model.Polygon
 import net.wuillemin.wktgrammar.WktBaseListener
 import net.wuillemin.wktgrammar.WktParser
 
@@ -15,7 +16,7 @@ import net.wuillemin.wktgrammar.WktParser
  */
 class WktListener : WktBaseListener() {
 
-    var shape : Shape? = null
+    var geometry: Geometry? = null
 
     override fun enterWtk(ctx: WktParser.WtkContext?) {
         println("Entering Wtk : " + ctx!!.text)
@@ -24,47 +25,47 @@ class WktListener : WktBaseListener() {
     //
     // Simple helper functions
     //
-    fun buildPoint(point: WktParser.PointTextContext): Point {
-        return Point(point.point().x().text.toDouble(), point.point().y().text.toDouble())
-    }
-
-    fun buildPoint(point: WktParser.PointContext): Point {
-        return Point(point.x().text.toDouble(), point.y().text.toDouble())
+    fun buildPoint(point: WktParser.PointContext): Point2D {
+        return Point2D(point.x().text.toDouble(), point.y().text.toDouble())
     }
 
     fun buildLineString(line: WktParser.LineStringTextContext): LineString {
         return LineString(line.point().map { point -> buildPoint(point) })
     }
 
+    fun buildLinearRing(line: WktParser.LineStringTextContext): LinearRing {
+        return LinearRing(line.point().map { point -> buildPoint(point) })
+    }
+
     //
     // Callbacks from the parser
     //
     override fun exitPointTaggedText(ctx: WktParser.PointTaggedTextContext) {
-        shape = buildPoint(ctx.pointText())
+        geometry = buildPoint(ctx.pointText().point())
     }
 
     override fun exitLineStringTaggedText(ctx: WktParser.LineStringTaggedTextContext) {
-        shape = LineString(ctx.lineStringText().point().map { point -> buildPoint(point) })
+        geometry = LineString(ctx.lineStringText().point().map { point -> buildPoint(point) })
     }
 
     override fun exitPolygonTaggedText(ctx: WktParser.PolygonTaggedTextContext) {
-        shape = Polygon(ctx.polygonText().lineStringText().map { line -> buildLineString(line) })
+        geometry = Polygon(ctx.polygonText().lineStringText().map { line -> buildLinearRing(line) })
     }
 
     override fun exitMultiPointTaggedText(ctx: WktParser.MultiPointTaggedTextContext) {
-        shape = MultiPoint(ctx.multiPointText().pointText().map { point -> buildPoint(point) })
+        geometry = MultiPoint(ctx.multiPointText().pointText().map { point -> buildPoint(point.point()) })
     }
 
     override fun exitMultiLineStringTaggedText(ctx: WktParser.MultiLineStringTaggedTextContext) {
-        shape = MultiLineString(ctx.multiLineStringText().lineStringText().map { line -> buildLineString(line) })
+        geometry = MultiLineString(ctx.multiLineStringText().lineStringText().map { line -> buildLineString(line) })
     }
 
     override fun exitMultiPolygonTaggedText(ctx: WktParser.MultiPolygonTaggedTextContext) {
-        shape = MultiPolygon(ctx.multiPolygonText().polygonText().map {
+        geometry = MultiPolygon(ctx.multiPolygonText().polygonText().map {
             polygon ->
             Polygon(polygon.lineStringText().map {
                 line ->
-                buildLineString(line)
+                buildLinearRing(line)
             })
         })
     }

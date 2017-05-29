@@ -1,12 +1,11 @@
 package net.wuillemin.geohelpers.wkt
 
-import net.wuillemin.geohelpers.common.Shape
+import net.wuillemin.geohelpers.model.Geometry
 import net.wuillemin.wktgrammar.WktLexer
 import net.wuillemin.wktgrammar.WktParser
 import org.antlr.v4.runtime.CharStream
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
-import java.io.File
 import java.io.InputStream
 
 /**
@@ -25,7 +24,7 @@ class WktReader {
          * @return A list of the shapes in the file
          */
         @JvmStatic
-        fun readWKT(str: String): Shape {
+        fun readWKT(str: String): Geometry {
             return WktReader().readWktStream(CharStreams.fromString(str))
         }
 
@@ -35,7 +34,7 @@ class WktReader {
          * @return A list of the shapes in the file
          */
         @JvmStatic
-        fun readWKT(stream: InputStream): Shape {
+        fun readWKT(stream: InputStream): Geometry {
             return WktReader().readWktStream(CharStreams.fromStream(stream))
         }
     }
@@ -45,7 +44,7 @@ class WktReader {
      * @param stream The stream to read.
      * @return A list of the shapes in the file
      */
-    fun readWktStream(stream: CharStream): Shape {
+    fun readWktStream(stream: CharStream): Geometry {
 
         // Set the lexer
         val lexer = WktLexer(stream)
@@ -62,7 +61,7 @@ class WktReader {
         parser.wtk()
 
         // Return the data if possible
-        return listener.shape ?: throw AssertionError("Nothing was read from the file")
+        return listener.geometry ?: throw AssertionError("Nothing was read from the file")
     }
 }
 

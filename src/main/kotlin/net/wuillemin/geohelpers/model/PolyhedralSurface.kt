@@ -27,14 +27,14 @@ open class PolyhedralSurface : Surface {
      * rings have the same coordinateDimension and spatialDimension. In both case, an AssertionError is
      * thrown.
      *
-     * @param rings the list of linear rings to be referenced in the collection
+     * @param patches the list of linear rings to be referenced in the collection
      */
     constructor(patches: List<Polygon>) : this(patches, "PolyhedralSurface")
 
     /**
      * Constructor to be used by sub classes that allows to define the geometryType
      *
-     * @param rings the list of linear rings to be referenced in the collection
+     * @param patches the list of linear rings to be referenced in the collection
      * @param geometryType the name of the geometry type, for example "LinearRing"
      */
     constructor(patches: List<Polygon>, geometryType: String) : super(geometryType) {

@@ -9,40 +9,32 @@ import org.antlr.v4.runtime.CommonTokenStream
 import java.io.InputStream
 
 /**
- * A Simple class for reading WKT Data. Supported data are: POINT, LINESTRING, POLYGON and MULTIPOINT
+ * A Simple class for reading WKT Data.
  */
 class WktReader {
 
     /**
-     * Companion object for providing static access in java client
+     * Read a WTK from an InputStream and give back the Geometry object
+     * @param str The string containing the WKT data to read
+     * @return The Geometry
      */
-    companion object {
-
-        /**
-         * Static function for reading a WKT string
-         * @param str The WKT data to read
-         * @return A list of the shapes in the file
-         */
-        @JvmStatic
-        fun readWKT(str: String): Geometry {
-            return WktReader().readWktStream(CharStreams.fromString(str))
-        }
-
-        /**
-         * Static function for reading a WKT input stream
-         * @param stream The WKT data to read
-         * @return A list of the shapes in the file
-         */
-        @JvmStatic
-        fun readWKT(stream: InputStream): Geometry {
-            return WktReader().readWktStream(CharStreams.fromStream(stream))
-        }
+    fun readWKT(str: String): Geometry {
+        return WktReader().readWktStream(CharStreams.fromString(str))
     }
 
     /**
-     * Reader for WKT stream
-     * @param stream The stream to read.
-     * @return A list of the shapes in the file
+     * Read a WTK from an InputStream and give back the Geometry object
+     * @param stream The stream containing the WKT data to read
+     * @return The Geometry
+     */
+    fun readWKT(stream: InputStream): Geometry {
+        return WktReader().readWktStream(CharStreams.fromStream(stream))
+    }
+
+    /**
+     * Read a WTK from an InputStream and give back the Geometry object
+     * @param stream An ANTLR stream containing the WKT data to read
+     * @return The Geometry
      */
     fun readWktStream(stream: CharStream): Geometry {
 

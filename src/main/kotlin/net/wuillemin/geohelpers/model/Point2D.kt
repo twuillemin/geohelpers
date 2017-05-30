@@ -11,7 +11,7 @@ data class Point2D(val x: Double, val y: Double) : Point() {
     /**
      * For 2D points, coordinateDimension is always 2 (X and Y)
      */
-    final override val coordinateDimension get() = 2
+    override val coordinateDimension get() = 2
 
     /**
      * For 2D points, spatialDimension is always 2 (X and Y)

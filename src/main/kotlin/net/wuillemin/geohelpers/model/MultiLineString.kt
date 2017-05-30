@@ -23,6 +23,6 @@ open class MultiLineString : MultiCurve {
     }
 
     override fun generateAsGeoJsonSubObject(): JsonElement {
-        return jsonArray(geometries.map { geometry -> geometry.generateAsGeoJsonSubObject() })
+        return jsonArray(geometries.map { it.generateAsGeoJsonSubObject() })
     }
 }

@@ -1,30 +1,23 @@
 package net.wuillemin.geohelpers.geojson
 
+import com.github.salomonbrys.kotson.jsonObject
+import com.google.gson.JsonObject
 import net.wuillemin.geohelpers.model.Geometry
 
 /**
- * A Simple class for writing GeoJson Data. Supported data are: POINT, LINESTRING, POLYGON and MULTIPOINT
+ * A Simple class for writing GeoJson Data.
  */
 class GeoJsonWriter {
 
-    // Companion object for providing static access in java client
-    companion object {
-
-        /**
-         * Static function for reading a WKT file
-         * @param geometry The shape to write
-         * @return A string with the shapes at the GeoJson format
-         */
-        @JvmStatic
-        fun writeGeoJson(geometry: Geometry): String {
-            return GeoJsonWriter().writeGeoJsonString(geometry)
-        }
-    }
-
     /**
-     * Writer for a GeoJson String
-     * @param geometry The shape to write
-     * @return A string with the shapes at the GeoJson format
+     * Generate a Json object containing a single GeoJsonFeature, the feature is defined by the given
+     * geometry
+     * @param geometry The geometry to generate
+     * @return  A Json object
      */
-    fun writeGeoJsonString(geometry: Geometry): String = geometry.generateAsGeoJsonObject().toString()
+    fun writeGeometryGeoJsonString(geometry: Geometry): JsonObject {
+        return jsonObject(
+                "type" to "Feature",
+                "geometry" to geometry.generateAsGeoJsonObject())
+    }
 }

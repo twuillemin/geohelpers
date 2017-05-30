@@ -69,6 +69,6 @@ open class Polygon : Surface {
     }
 
     override fun generateAsGeoJsonSubObject(): JsonElement {
-        return jsonArray(rings.map { ring -> ring.generateAsGeoJsonSubObject() })
+        return jsonArray(rings.map { it.generateAsGeoJsonSubObject() })
     }
 }

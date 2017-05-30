@@ -70,7 +70,7 @@ open class LineString : Curve {
                 "coordinates" to generateAsGeoJsonSubObject())
     }
 
-    override fun generateAsGeoJsonSubObject(): JsonElement  {
-        return jsonArray(vertices.map { vertex -> vertex.generateAsGeoJsonSubObject() })
+    override fun generateAsGeoJsonSubObject(): JsonElement {
+        return jsonArray(vertices.map { it.generateAsGeoJsonSubObject() })
     }
 }

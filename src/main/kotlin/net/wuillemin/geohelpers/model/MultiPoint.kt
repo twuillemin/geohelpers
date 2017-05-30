@@ -28,6 +28,6 @@ open class MultiPoint : GeometryCollection {
     }
 
     override fun generateAsGeoJsonSubObject(): JsonElement {
-        return jsonArray(geometries.map { geometry -> geometry.generateAsGeoJsonSubObject() })
+        return jsonArray(geometries.map { it.generateAsGeoJsonSubObject() })
     }
 }

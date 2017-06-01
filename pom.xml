@@ -5,7 +5,7 @@
 
     <groupId>net.wuillemin</groupId>
     <artifactId>geohelpers</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <packaging>jar</packaging>
 
     <name>geohelpers</name>

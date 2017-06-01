@@ -5,7 +5,7 @@
 
     <groupId>net.wuillemin</groupId>
     <artifactId>geohelpers</artifactId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>geohelpers</name>
@@ -30,12 +30,35 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Dependencies -->
         <kotlin.version>1.1.2-4</kotlin.version>
         <junit.version>4.12</junit.version>
         <kotlon.version>2.5.0</kotlon.version>
         <wktgrammar.version>0.3</wktgrammar.version>
+        <!-- Build -->
+        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
         <dokka.version>0.9.13</dokka.version>
+        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
     </properties>
+
+    <scm>
+        <connection>scm:git:ssh://git@bitbucket.org/ThomasWuillemin/geohelpers.git</connection>
+        <developerConnection>scm:git:ssh://git@bitbucket.org/ThomasWuillemin/geohelpers.git</developerConnection>
+        <url>https://bitbucket.org/ThomasWuillemin/geohelpers</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
+
 
     <!-- Repository for Dokka (Kotlin javadoc) -->
     <pluginRepositories>
@@ -136,7 +159,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>${maven-source-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -151,7 +174,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
+                <version>${maven-gpg-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -171,7 +194,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
+                <version>${nexus-staging-maven-plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>

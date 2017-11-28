@@ -1,0 +1,39 @@
+# Java binary files
+*.class
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Spring properties
+application.properties
+
+# IntelliJ files
+.idea/
+*.iml
+
+# Eclipse
+.project
+.settings
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Gradle
+.gradle/
+out/
+
+# Other files
+*.log
+.DS_Store
+.classpath

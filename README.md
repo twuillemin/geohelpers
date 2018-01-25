@@ -13,8 +13,7 @@ A simple wrapper for converting WKT files to GeoJson using the WktGrammar. Reall
 
 * Publishing:
   - commit with a non snapshot version
-  - mvn clean dokka:javadocJar install
-  - mvn deploy
+  - mvn clean dokka:javadocJar install deploy
 
 ### Contribution guidelines ###
 

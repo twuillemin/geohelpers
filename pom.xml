@@ -5,7 +5,7 @@
 
     <groupId>net.wuillemin</groupId>
     <artifactId>geohelpers</artifactId>
-    <version>0.3</version>
+    <version>0.4</version>
     <packaging>jar</packaging>
 
     <name>geohelpers</name>
@@ -31,7 +31,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Dependencies -->
-        <kotlin.version>1.2.0</kotlin.version>
+        <kotlin.version>1.2.21</kotlin.version>
         <junit.version>4.12</junit.version>
         <kotlon.version>2.5.0</kotlon.version>
         <wktgrammar.version>0.3</wktgrammar.version>

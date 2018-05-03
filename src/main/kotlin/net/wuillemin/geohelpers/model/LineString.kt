@@ -54,12 +54,10 @@ open class LineString : Curve {
 
         // Check that all rings have the same coordinateDimension and spatialDimension
         val first: Point = vertices.first()
-        if (vertices
-                .filter({
+        if (vertices.any({
                     (it.coordinateDimension != first.coordinateDimension) ||
                             (it.spatialDimension != first.spatialDimension)
-                })
-                .isNotEmpty()) {
+                })) {
             throw AssertionError("Bad LineString format - all LineStrings must be of the same type: 2D, 2D+M, 3D or 3D+M")
         }
     }

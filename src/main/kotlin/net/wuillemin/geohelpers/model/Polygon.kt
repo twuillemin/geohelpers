@@ -52,12 +52,10 @@ open class Polygon : Surface {
 
         // Check that all rings have the same coordinateDimension and spatialDimension
         val first: LinearRing = rings.first()
-        if (rings
-                .filter({
+        if (rings.any({
                     (it.coordinateDimension != first.coordinateDimension) ||
                             (it.spatialDimension != first.spatialDimension)
-                })
-                .isNotEmpty()) {
+                })) {
             throw AssertionError("Bad Polygon format - all rings must be of the same type: 2D, 2D+M, 3D or 3D+M")
         }
     }

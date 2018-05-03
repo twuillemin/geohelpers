@@ -70,9 +70,7 @@ open class GeometryCollection : Geometry {
 
         // Check that all geometries have the same coordinateDimension
         val first: Geometry = geometries.first()
-        if (geometries
-                .filter({it.dimension != first.dimension})
-                .isNotEmpty()) {
+        if (geometries.any({it.dimension != first.dimension})) {
             // If not return -1
             return -1
         }
@@ -88,9 +86,7 @@ open class GeometryCollection : Geometry {
 
         // Check that all geometries have the same coordinateDimension
         val first: Geometry = geometries.first()
-        if (geometries
-                .filter({it.coordinateDimension != first.coordinateDimension})
-                .isNotEmpty()) {
+        if (geometries.any({it.coordinateDimension != first.coordinateDimension})) {
             // If not return -1
             return -1
         }
@@ -106,9 +102,7 @@ open class GeometryCollection : Geometry {
 
         // Check that all geometries have the same coordinateDimension
         val first: Geometry = geometries.first()
-        if (geometries
-                .filter({it.spatialDimension != first.spatialDimension})
-                .isNotEmpty()) {
+        if (geometries.any({it.spatialDimension != first.spatialDimension})) {
             // If not return -1
             return -1
         }

@@ -1,7 +1,6 @@
 package net.wuillemin.geohelpers.wkt
 
 import net.wuillemin.geohelpers.model.LineString
-import net.wuillemin.geohelpers.model.LinearRing
 import net.wuillemin.geohelpers.model.MultiLineString
 import net.wuillemin.geohelpers.model.MultiPoint
 import net.wuillemin.geohelpers.model.MultiPolygon
@@ -69,17 +68,12 @@ class WktReader2DMTest {
             assertEquals(1, polygon.rings.size)
 
             val line = polygon.rings[0]
-            if (line is LinearRing) {
-                assertEquals(5, line.vertices.size)
-                assertEquals(Point2DM(1.0, 1.0, 1.0), line.vertices[0])
-                assertEquals(Point2DM(5.0, 1.0, 1.0), line.vertices[1])
-                assertEquals(Point2DM(5.0, 5.0, 5.0), line.vertices[2])
-                assertEquals(Point2DM(1.0, 5.0, 5.0), line.vertices[3])
-                assertEquals(Point2DM(1.0, 1.0, 1.0), line.vertices[4])
-            }
-            else {
-                assertTrue(line is LineString)
-            }
+            assertEquals(5, line.vertices.size)
+            assertEquals(Point2DM(1.0, 1.0, 1.0), line.vertices[0])
+            assertEquals(Point2DM(5.0, 1.0, 1.0), line.vertices[1])
+            assertEquals(Point2DM(5.0, 5.0, 5.0), line.vertices[2])
+            assertEquals(Point2DM(1.0, 5.0, 5.0), line.vertices[3])
+            assertEquals(Point2DM(1.0, 1.0, 1.0), line.vertices[4])
         }
         else {
             assertTrue(polygon is Polygon)
@@ -168,30 +162,20 @@ class WktReader2DMTest {
                 assertEquals(2, polygon1.rings.size)
 
                 val line1 = polygon1.rings[0]
-                if (line1 is LinearRing) {
-                    assertEquals(5, line1.vertices.size)
-                    assertEquals(Point2DM(1.0, 1.0, 1.0), line1.vertices[0])
-                    assertEquals(Point2DM(5.0, 1.0, 1.0), line1.vertices[1])
-                    assertEquals(Point2DM(5.0, 5.0, 5.0), line1.vertices[2])
-                    assertEquals(Point2DM(1.0, 5.0, 5.0), line1.vertices[3])
-                    assertEquals(Point2DM(1.0, 1.0, 1.0), line1.vertices[4])
-                }
-                else {
-                    assertTrue(line1 is LinearRing)
-                }
+                assertEquals(5, line1.vertices.size)
+                assertEquals(Point2DM(1.0, 1.0, 1.0), line1.vertices[0])
+                assertEquals(Point2DM(5.0, 1.0, 1.0), line1.vertices[1])
+                assertEquals(Point2DM(5.0, 5.0, 5.0), line1.vertices[2])
+                assertEquals(Point2DM(1.0, 5.0, 5.0), line1.vertices[3])
+                assertEquals(Point2DM(1.0, 1.0, 1.0), line1.vertices[4])
 
                 val line2 = polygon1.rings[1]
-                if (line2 is LinearRing) {
-                    assertEquals(5, line2.vertices.size)
-                    assertEquals(Point2DM(2.0, 2.0, 2.0), line2.vertices[0])
-                    assertEquals(Point2DM(2.0, 3.0, 3.0), line2.vertices[1])
-                    assertEquals(Point2DM(3.0, 3.0, 3.0), line2.vertices[2])
-                    assertEquals(Point2DM(3.0, 2.0, 2.0), line2.vertices[3])
-                    assertEquals(Point2DM(2.0, 2.0, 2.0), line2.vertices[4])
-                }
-                else {
-                    assertTrue(line2 is LinearRing)
-                }
+                assertEquals(5, line2.vertices.size)
+                assertEquals(Point2DM(2.0, 2.0, 2.0), line2.vertices[0])
+                assertEquals(Point2DM(2.0, 3.0, 3.0), line2.vertices[1])
+                assertEquals(Point2DM(3.0, 3.0, 3.0), line2.vertices[2])
+                assertEquals(Point2DM(3.0, 2.0, 2.0), line2.vertices[3])
+                assertEquals(Point2DM(2.0, 2.0, 2.0), line2.vertices[4])
             }
             else {
                 assertTrue(polygon1 is Polygon)
@@ -202,16 +186,11 @@ class WktReader2DMTest {
                 assertEquals(1, polygon2.rings.size)
 
                 val line3 = polygon2.rings[0]
-                if (line3 is LinearRing) {
-                    assertEquals(4, line3.vertices.size)
-                    assertEquals(Point2DM(6.0, 3.0, 3.0), line3.vertices[0])
-                    assertEquals(Point2DM(9.0, 2.0, 2.0), line3.vertices[1])
-                    assertEquals(Point2DM(9.0, 4.0, 4.0), line3.vertices[2])
-                    assertEquals(Point2DM(6.0, 3.0, 3.0), line3.vertices[3])
-                }
-                else {
-                    assertTrue(line3 is LinearRing)
-                }
+                assertEquals(4, line3.vertices.size)
+                assertEquals(Point2DM(6.0, 3.0, 3.0), line3.vertices[0])
+                assertEquals(Point2DM(9.0, 2.0, 2.0), line3.vertices[1])
+                assertEquals(Point2DM(9.0, 4.0, 4.0), line3.vertices[2])
+                assertEquals(Point2DM(6.0, 3.0, 3.0), line3.vertices[3])
             }
             else {
                 assertTrue(polygon1 is Polygon)

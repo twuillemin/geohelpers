@@ -50,12 +50,10 @@ open class PolyhedralSurface : Surface {
 
         // Check that all patches have the same coordinateDimension and spatialDimension
         val first: Polygon = patches.first()
-        if (patches
-                .filter({
+        if (patches.any({
                     (it.coordinateDimension != first.coordinateDimension) ||
                             (it.spatialDimension != first.spatialDimension)
-                })
-                .isNotEmpty()) {
+                })) {
             throw AssertionError("Bad PolyhedralSurface format - all patches must be of the same type: 2D, 2D+M, 3D or 3D+M")
         }
     }

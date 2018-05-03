@@ -5,7 +5,7 @@
 
     <groupId>net.wuillemin</groupId>
     <artifactId>geohelpers</artifactId>
-    <version>0.4</version>
+    <version>0.5-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>geohelpers</name>
@@ -31,13 +31,13 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Dependencies -->
-        <kotlin.version>1.2.21</kotlin.version>
+        <kotlin.version>1.2.41</kotlin.version>
         <junit.version>4.12</junit.version>
-        <kotlon.version>2.5.0</kotlon.version>
+        <kotson.version>2.5.0</kotson.version>
         <wktgrammar.version>0.3</wktgrammar.version>
         <!-- Build -->
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <dokka.version>0.9.13</dokka.version>
+        <dokka.version>0.9.15</dokka.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
     </properties>
@@ -78,11 +78,11 @@
             <version>${kotlin.version}</version>
         </dependency>
 
-        <!-- Kotlon for easy use of JSON files -->
+        <!-- Kotson for easy use of JSON files -->
         <dependency>
             <groupId>com.github.salomonbrys.kotson</groupId>
             <artifactId>kotson</artifactId>
-            <version>${kotlon.version}</version>
+            <version>${kotson.version}</version>
         </dependency>
 
         <!-- The parser for WKT files -->

@@ -7,7 +7,7 @@ package net.wuillemin.geohelpers.model
 class Triangle(rings: List<LinearRing>) : Polygon(rings, "Triangle") {
 
     init {
-        if (rings.filter { it.vertices.size != 4 }.isNotEmpty()) {
+        if (rings.any { it.vertices.size != 4 }) {
             throw AssertionError("Bad Triangle format - a LinearRing with just 4 points is needed")
         }
     }

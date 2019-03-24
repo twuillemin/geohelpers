@@ -10,7 +10,7 @@
 
     <name>geohelpers</name>
     <description>A simple collection of helpers for geo files (WKT, GeoJSON). Designed to be straightforward</description>
-    <url>https://bitbucket.org/ThomasWuillemin/geohelpers</url>
+    <url>https://github.com/twuillemin/geohelpers</url>
 
     <licenses>
         <license>
@@ -43,9 +43,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:ssh://git@bitbucket.org/ThomasWuillemin/geohelpers.git</connection>
-        <developerConnection>scm:git:ssh://git@bitbucket.org/ThomasWuillemin/geohelpers.git</developerConnection>
-        <url>https://bitbucket.org/ThomasWuillemin/geohelpers</url>
+        <connection>scm:git:ssh://git@github.com/twuillemin/geohelpers.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/twuillemin/geohelpers.git</developerConnection>
+        <url>https://github.com/twuillemin/geohelpers</url>
     </scm>
 
     <distributionManagement>

@@ -9,7 +9,7 @@ A simple wrapper for converting WKT files to GeoJson using the WktGrammar. Reall
 ### How do I get set up? ###
 
 * usage:
-  - git clone git@bitbucket.org:ThomasWuillemin/geohelpers.git
+  - git clone git@github.com/twuillemin/geohelpers.git
 
 * Publishing:
   - commit with a non snapshot version
